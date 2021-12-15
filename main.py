@@ -1,14 +1,12 @@
 # Модуль автоматической работы со служебными записками по исправлению свода доходов в Самару
-# Скрипт полностью работоспособен. Работает из MS Outlook.
-# Установить:
-# pip install pyautogui
-# pip install pywin32
+# Установить: pip install pywin32
+
+# Импорты
 import shutil
 import glob
-# Импорт моих модулей
 from ROI_base import *  # мой модуль для вывода времени
 
-# КОНСТАНТЫ
+# Константы
 NOW_DATE = datetime.now().strftime('%d.%m.%Y')  # текущая дата для работы в скрипте в формате 03.05.2021
 NOTES_PATH = 'D:/Dropbox/Работа/Работа РОИ/+Выручка/!Корректировки в Самару/'
 GENERATION_PATH = '+Генерация/'
@@ -33,8 +31,6 @@ def outlook_sending() -> None:
     import win32com.client as win32  # импорт модуля для работы с Win32COM, pip install pywin32
     to_email = "slv1@rosinkas.ru; sev3@rosinkas.ru"  # основные получатели
     cc_email = "dsn2@rosinkas.ru; azd@rosinkas.ru; mev6@rosinkas.ru"  # получатели в копии
-    # to_email = "vyacheslav.mitin@gmail.com"  # основные получатели
-    # cc_email = "vyacheslav.mitin@gmail.com"  # получатели в копии
     attach_file_pdf = search_file_attach()[0]  # путь к файлу
     file_name = search_file_attach()[1]
     outlook = win32.gencache.EnsureDispatch('Outlook.Application')  # вызов MS Outlook
@@ -50,9 +46,9 @@ ___________________
 С уважением,
  Митин Вячеслав Алексеевич, 8-902-004-27-98"""
     print_log("Письмо для отправки через MS Outlook подготовлено", line_after=False)
-    new_mail.Attachments.Add(Source=str(attach_file_pdf))  # присоединение вложения с файлом .xml.sig.enc
+    new_mail.Attachments.Add(Source=str(attach_file_pdf))  # присоединение вложения с файлом
     new_mail.Display(True)  # отображение подготовленного
-    # new_mail.Send()  # немедленная отправка письма, дальше MS Outlook распределит сам в папку
+    # new_mail.Send()  # немедленная отправка письма
     print_log(f"Письмо с файлом '{file_name}' отправлено", line_after=True)
 
 
@@ -68,3 +64,4 @@ if __name__ == '__main__':
     print_log(f"Файл для отправки '{search_file_attach()[1]}'", line_after=True)
     outlook_sending()
     move_file_attach(*search_file_attach())
+    print_log(f"Работа модуля окончена", line_after=True)
