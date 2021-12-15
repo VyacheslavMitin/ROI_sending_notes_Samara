@@ -14,12 +14,19 @@ SENDING_PATH = 'Отправленные/'
 
 
 # Функции
+def pause():
+    a = input("\n Нажмите Enter для выхода...")
+    print(a)
+
+
 def search_file_attach() -> tuple:
     """Функция поиска файла для работы"""
     path0 = os.path.join(NOTES_PATH, GENERATION_PATH)
     files = glob.glob(path0 + f'{NOW_DATE}*.pdf')
     if not files:
-        sys.exit('Нет файлов на оправку')
+        print_log('Нет файлов на оправку')
+        pause()
+        sys.exit()
     attach_file_pdf = files[0]
     _, file_name = attach_file_pdf.split('\\')
     return attach_file_pdf, file_name
@@ -60,8 +67,10 @@ def move_file_attach(file, name_file) -> None:
 
 
 if __name__ == '__main__':
+    print('модуль отправки служебных записок по корректировке свода доходов в самару'.upper() + '\n')
     search_file_attach()
     print_log(f"Файл для отправки '{search_file_attach()[1]}'", line_after=True)
     outlook_sending()
     move_file_attach(*search_file_attach())
     print_log(f"Работа модуля окончена", line_after=True)
+    pause()
