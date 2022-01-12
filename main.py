@@ -22,7 +22,7 @@ def pause():
 def search_file_attach() -> tuple:
     """Функция поиска файла для работы"""
     path0 = os.path.join(NOTES_PATH, GENERATION_PATH)
-    files = glob.glob(path0 + f'{NOW_DATE}*.pdf')
+    files = glob.glob(path0 + f'*.pdf')  # f'{NOW_DATE}*.pdf'
     if not files:
         print_log('Нет файлов на оправку')
         pause()
@@ -47,7 +47,7 @@ def outlook_sending() -> None:
     new_mail.CC = cc_email  # обращение к списку получателей в копии
     # new_mail.BodyFormat = 1  # формат PlainText
     new_mail.BodyFormat = 2  # формат HTML
-    new_mail.Body = f"""Высылаю служебную записку '{file_name}'.
+    new_mail.Body = f"""Высылаю служебную записку '{file_name}'. В САДД она уже прикреплена.
         
 ___________________
 С уважением,
