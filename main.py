@@ -47,11 +47,14 @@ def outlook_sending() -> None:
     new_mail.CC = cc_email  # обращение к списку получателей в копии
     # new_mail.BodyFormat = 1  # формат PlainText
     new_mail.BodyFormat = 2  # формат HTML
-    new_mail.Body = f"""Высылаю служебную записку '{file_name}'. В САДД она уже прикреплена.
+    new_mail.Body = f"""Высылаю служебную записку '{file_name}'.
+В САДД она уже прикреплена.
         
 ___________________
 С уважением,
- Митин Вячеслав Алексеевич, 8-902-004-27-98"""
+ведущий специалист РЦ "Ульяновск"
+Митин Вячеслав Алексеевич, 8-902-004-27-98
+"""
     print_log("Письмо для отправки через MS Outlook подготовлено", line_after=False)
     new_mail.Attachments.Add(Source=str(attach_file_pdf))  # присоединение вложения с файлом
     new_mail.Display(True)  # отображение подготовленного
