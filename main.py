@@ -36,8 +36,8 @@ def outlook_sending() -> None:
     """Функция отправки письма через MS Outlook"""
     print_log("Отправка файлов через MS Outlook")
     import win32com.client as win32  # импорт модуля для работы с Win32COM, pip install pywin32
-    to_email = "slv1@rosinkas.ru; sev3@rosinkas.ru"  # основные получатели
-    cc_email = "dsn2@rosinkas.ru; azd@rosinkas.ru; mev6@rosinkas.ru"  # получатели в копии
+    to_email = "samara@rosinkas.ru; slv1@rosinkas.ru; sev3@rosinkas.ru"  # основные получатели
+    cc_email = "dsn2@rosinkas.ru; azd@rosinkas.ru; mev6@rosinkas.ru"  # получатели в копии aea1@rosinkas.ru
     attach_file_pdf = search_file_attach()[0]  # путь к файлу
     file_name = search_file_attach()[1]
     outlook = win32.gencache.EnsureDispatch('Outlook.Application')  # вызов MS Outlook
@@ -47,8 +47,7 @@ def outlook_sending() -> None:
     new_mail.CC = cc_email  # обращение к списку получателей в копии
     # new_mail.BodyFormat = 1  # формат PlainText
     new_mail.BodyFormat = 2  # формат HTML
-    new_mail.Body = f"""Высылаю служебную записку '{file_name}'.
-В САДД она уже прикреплена.
+    new_mail.Body = f"""Высылаю служебную записку '{file_name}' на коррекцию свода доходов РЦ "Ульяновск".
         
 ___________________
 С уважением,
